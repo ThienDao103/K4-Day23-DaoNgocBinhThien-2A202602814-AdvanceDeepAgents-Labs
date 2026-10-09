@@ -1,0 +1,64 @@
+{
+  "topic": "survey about world model",
+  "model": "google_genai:gemini-3.1-flash-lite",
+  "elapsed_s": 1485.7,
+  "subagent_calls": 6,
+  "tool_calls": {
+    "write_todos": 7,
+    "task": 6,
+    "glob": 1,
+    "read_file": 9,
+    "write_file": 4,
+    "execute": 10,
+    "web_fetch": 2,
+    "edit_file": 1
+  },
+  "tokens": {
+    "input": 500245,
+    "output": 9534
+  },
+  "n_sources": 12,
+  "source_families": [
+    "arxiv",
+    "hf-search",
+    "web"
+  ],
+  "run_kind": "focused_revision",
+  "revision_of_sha256": "757dee297e816378568da4b815b6d916ad73304ef724b100724abfd23a7070fb",
+  "runs": [
+    {
+      "model": "google_genai:gemini-3.5-flash-lite",
+      "elapsed_s": 1109.5,
+      "subagent_calls": 5,
+      "tool_calls": {
+        "write_todos": 4,
+        "task": 5,
+        "glob": 1,
+        "read_file": 6,
+        "write_file": 4,
+        "execute": 7
+      },
+      "tokens": {
+        "input": 392671,
+        "output": 8360
+      }
+    },
+    {
+      "model": "google_genai:gemini-3.1-flash-lite",
+      "elapsed_s": 376.2,
+      "subagent_calls": 1,
+      "tool_calls": {
+        "write_todos": 3,
+        "read_file": 3,
+        "web_fetch": 2,
+        "execute": 3,
+        "task": 1,
+        "edit_file": 1
+      },
+      "tokens": {
+        "input": 107574,
+        "output": 1174
+      }
+    }
+  ]
+}

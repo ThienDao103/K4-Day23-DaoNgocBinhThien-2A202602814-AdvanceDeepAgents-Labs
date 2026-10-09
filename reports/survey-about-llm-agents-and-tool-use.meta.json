@@ -1,0 +1,67 @@
+{
+  "topic": "survey about LLM agents and tool use",
+  "model": "google_genai:gemini-3.1-flash-lite",
+  "elapsed_s": 1444.5,
+  "subagent_calls": 5,
+  "tool_calls": {
+    "write_todos": 4,
+    "task": 5,
+    "glob": 1,
+    "read_file": 8,
+    "write_file": 7,
+    "execute": 8,
+    "web_fetch": 2,
+    "web_search": 1,
+    "edit_file": 3
+  },
+  "tokens": {
+    "input": 582460,
+    "output": 14075
+  },
+  "n_sources": 15,
+  "source_families": [
+    "arxiv",
+    "hf-search",
+    "web"
+  ],
+  "run_kind": "focused_revision",
+  "revision_of_sha256": "314b418e04a4c1f74e09f0b4e435b2d60364911026ffc8fe5c2ddd1e68f12325",
+  "runs": [
+    {
+      "model": "google_genai:gemini-3.5-flash-lite",
+      "elapsed_s": 1149.7,
+      "subagent_calls": 4,
+      "tool_calls": {
+        "write_todos": 2,
+        "task": 4,
+        "glob": 1,
+        "read_file": 5,
+        "write_file": 5,
+        "execute": 6
+      },
+      "tokens": {
+        "input": 375273,
+        "output": 11983
+      }
+    },
+    {
+      "model": "google_genai:gemini-3.1-flash-lite",
+      "elapsed_s": 294.8,
+      "subagent_calls": 1,
+      "tool_calls": {
+        "write_todos": 2,
+        "read_file": 3,
+        "web_fetch": 2,
+        "web_search": 1,
+        "write_file": 2,
+        "task": 1,
+        "edit_file": 3,
+        "execute": 2
+      },
+      "tokens": {
+        "input": 207187,
+        "output": 2092
+      }
+    }
+  ]
+}

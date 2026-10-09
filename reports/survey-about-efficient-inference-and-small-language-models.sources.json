@@ -1,0 +1,58 @@
+[
+  {
+    "n": 1,
+    "id": "2402.14905",
+    "url": "https://huggingface.co/papers/2402.14905",
+    "title": "MobileLLM: Optimizing Sub-billion Parameter Language Models for On-Device Use Cases",
+    "date": "2024-02-22",
+    "source": "hf-search"
+  },
+  {
+    "n": 2,
+    "id": "spec-decoding",
+    "url": "https://prakashkagitha.github.io/llm-stack-book/07-inference-serving/06-speculative-decoding.html",
+    "title": "Speculative Decoding: Draft Models, Medusa, EAGLE & Lookahead — The LLM Stack",
+    "date": "n.d.",
+    "source": "web"
+  },
+  {
+    "n": 3,
+    "id": "2306.08543",
+    "url": "https://arxiv.org/abs/2306.08543",
+    "title": "MiniLLM: On-Policy Distillation of Large Language Models",
+    "date": "2026-01-31",
+    "source": "arxiv"
+  },
+  {
+    "n": 4,
+    "id": "eacl-2026-spec",
+    "url": "https://aclanthology.org/2026.eacl-long.255/",
+    "title": "An Empirical Study of Speculative Decoding for Small Language Models",
+    "date": "n.d.",
+    "source": "web"
+  },
+  {
+    "n": 5,
+    "id": "HW-GPT-Bench",
+    "url": "https://proceedings.neurips.cc/paper_files/paper/2024/file/6ffdbf064df51857eb802a904aaaba63-Paper-Datasets_and_Benchmarks_Track.pdf",
+    "title": "HW-GPT-Bench: Hardware-Aware Architecture Benchmark for Language Models",
+    "date": "n.d.",
+    "source": "web"
+  },
+  {
+    "n": 6,
+    "id": "2402.16840",
+    "url": "https://huggingface.co/papers/2402.16840",
+    "title": "MobiLlama: Towards Accurate and Lightweight Fully Transparent GPT",
+    "date": "2024-02-26",
+    "source": "hf-search"
+  },
+  {
+    "n": 7,
+    "id": "NVlabs-Minitron",
+    "url": "https://github.com/NVlabs/Minitron",
+    "title": "NVlabs/Minitron",
+    "date": "2024-07-17",
+    "source": "web"
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "n": 1,
+    "id": "1809.01999",
+    "url": "https://arxiv.org/abs/1809.01999",
+    "title": "Recurrent World Models Facilitate Policy Evolution",
+    "date": "2018-09-04",
+    "source": "arxiv"
+  },
+  {
+    "n": 2,
+    "id": "2610.04009",
+    "url": "https://arxiv.org/abs/2610.04009",
+    "title": "SUAVE: Unified Video-Action Models via Masked Diffusion",
+    "date": "2026-10-02",
+    "source": "arxiv"
+  },
+  {
+    "n": 3,
+    "id": "2607.23909",
+    "url": "https://huggingface.co/papers/2607.23909",
+    "title": "WorldDiT: A Unified Diffusion Architecture for World and Action Modeling",
+    "date": "2026-07-27",
+    "source": "hf-search"
+  },
+  {
+    "n": 4,
+    "id": "2505.13934",
+    "url": "https://huggingface.co/papers/2505.13934",
+    "title": "RLVR-World: Training World Models with Reinforcement Learning",
+    "date": "2025-05-20",
+    "source": "hf-search"
+  },
+  {
+    "n": 5,
+    "id": "2607.02642",
+    "url": "https://huggingface.co/papers/2607.02642",
+    "title": "GigaWorld-1: A Roadmap to Build World Models for Robot Policy Evaluation",
+    "date": "2026-07-02",
+    "source": "hf-search"
+  },
+  {
+    "n": 6,
+    "id": "2601.07823v2",
+    "url": "https://arxiv.org/abs/2601.07823v2",
+    "title": "Robotic Video World Models: A Survey of Applications, Challenges, and Future Directions",
+    "date": "2026-09-17",
+    "source": "web"
+  },
+  {
+    "n": 7,
+    "id": "2608.30692",
+    "url": "https://arxiv.org/abs/2608.30692",
+    "title": "Can Video World Models Track Unobserved World States?",
+    "date": "2026-08-31",
+    "source": "arxiv"
+  },
+  {
+    "n": 8,
+    "id": "2609.39235",
+    "url": "https://arxiv.org/abs/2609.39235",
+    "title": "The Planning Limits of Latent World Models",
+    "date": "2026-09-30",
+    "source": "web"
+  },
+  {
+    "n": 9,
+    "id": "2301.04104",
+    "url": "https://arxiv.org/abs/2301.04104",
+    "title": "Mastering Diverse Domains through World Models",
+    "date": "2023-01-10",
+    "source": "arxiv"
+  },
+  {
+    "n": 10,
+    "id": "2610.07031",
+    "url": "https://arxiv.org/abs/2610.07031",
+    "title": "Artemis: Geometry-Grounded Multi-Agent Driving World Models with Shared 3D State and Progressive Memory Update",
+    "date": "2026-10-04",
+    "source": "arxiv"
+  },
+  {
+    "n": 11,
+    "id": "2606.25473",
+    "url": "https://huggingface.co/papers/2606.25473",
+    "title": "Causal-rCM: A Unified Teacher-Forcing and Self-Forcing Open Recipe for Autoregressive Diffusion Distillation in Streaming Video Generation and Interactive World Models",
+    "date": "2026-06-24",
+    "source": "hf-search"
+  },
+  {
+    "n": 12,
+    "id": "2602.01960v2",
+    "url": "https://arxiv.org/abs/2602.01960v2",
+    "title": "Grounding Generated Videos in Feasible Plans via World Models",
+    "date": "n.d.",
+    "source": "web"
+  }
+]

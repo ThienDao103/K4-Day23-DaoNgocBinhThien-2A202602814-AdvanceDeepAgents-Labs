@@ -1,0 +1,4 @@
+# Preserve the exact sandbox artifact bytes on Windows and Linux checkouts.
+reports/*.md -text
+reports/*.sources.json -text
+reports/*.meta.json -text

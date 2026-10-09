@@ -1,0 +1,82 @@
+{
+  "topic": "survey about efficient inference and small language models",
+  "model": "google_genai:gemini-3.1-flash-lite",
+  "elapsed_s": 1952.9,
+  "subagent_calls": 7,
+  "tool_calls": {
+    "write_todos": 6,
+    "task": 7,
+    "edit_file": 12,
+    "read_file": 13,
+    "write_file": 2,
+    "execute": 15,
+    "web_search": 1,
+    "web_fetch": 4
+  },
+  "tokens": {
+    "input": 803107,
+    "output": 14250
+  },
+  "n_sources": 7,
+  "source_families": [
+    "arxiv",
+    "hf-search",
+    "web"
+  ],
+  "run_kind": "focused_revision",
+  "revision_of_sha256": "92268ba59844ac9d1efb5394d48d448734b7449d79ccf7a72813141b6dea4dd6",
+  "runs": [
+    {
+      "model": "google_genai:gemini-3.1-flash-lite",
+      "elapsed_s": 997.9,
+      "subagent_calls": 5,
+      "tool_calls": {
+        "write_todos": 2,
+        "task": 5,
+        "edit_file": 3,
+        "read_file": 5,
+        "write_file": 2,
+        "execute": 5
+      },
+      "tokens": {
+        "input": 296382,
+        "output": 7039
+      }
+    },
+    {
+      "model": "google_genai:gemini-3.1-flash-lite",
+      "elapsed_s": 326.0,
+      "subagent_calls": 1,
+      "tool_calls": {
+        "write_todos": 2,
+        "read_file": 4,
+        "web_search": 1,
+        "web_fetch": 1,
+        "edit_file": 3,
+        "task": 1,
+        "execute": 6
+      },
+      "tokens": {
+        "input": 311157,
+        "output": 5060
+      }
+    },
+    {
+      "model": "google_genai:gemini-3.1-flash-lite",
+      "elapsed_s": 629.0,
+      "subagent_calls": 1,
+      "tool_calls": {
+        "write_todos": 2,
+        "read_file": 4,
+        "web_fetch": 3,
+        "execute": 4,
+        "edit_file": 6,
+        "task": 1
+      },
+      "tokens": {
+        "input": 195568,
+        "output": 2151
+      }
+    }
+  ]
+}

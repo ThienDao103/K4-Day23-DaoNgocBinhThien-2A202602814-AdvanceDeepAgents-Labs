@@ -1,5 +1,98 @@
 # Deep Research Agent (Deep Agents + Sandbox)
 
+## Hướng dẫn chạy bản triển khai
+
+Hệ thống lập kế hoạch, giao ít nhất ba researcher, tổng hợp bằng chứng và kiểm tra trích dẫn
+trong sandbox. Công cụ mạng chạy trên host; khóa không được upload vào sandbox.
+
+### Windows / PowerShell
+
+```powershell
+python -m venv .venv
+& .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+Copy-Item .env.example .env  # chỉ khi chưa có .env
+```
+
+Điền `.env` cục bộ. Với Gemini dùng `LAB_MODEL=google_genai:<model-id>` và `GOOGLE_API_KEY`.
+Với endpoint tương thích OpenAI dùng `LAB_BASE_URL`, `LAB_MODEL`, `LAB_API_KEY`.
+Model phải hỗ trợ tool calling. Dùng `EXA_API_KEY` để giảm lỗi giới hạn tốc độ web.
+
+Sandbox mặc định là Daytona (`DAYTONA_API_KEY`). Đặt `SANDBOX_FALLBACK=docker` để tự chuyển sang
+Docker nếu tạo Daytona thất bại; hoặc `SANDBOX=docker` để dùng Docker ngay.
+Docker Desktop phải đang chạy Linux containers; image cần Python 3 và bash.
+Fallback không chạy lại khi agent thất bại, tránh nhân đôi lượt gọi mô hình.
+
+```powershell
+# Kiểm thử không gọi API / không tốn token
+& .\.venv\Scripts\python.exe -m unittest discover -s tests -v
+
+# Thử 5 công cụ với dữ liệu thật
+& .\.venv\Scripts\python.exe tools.py
+
+# Chạy một chủ đề
+& .\.venv\Scripts\python.exe research.py "survey about world model"
+
+# Sinh lại từ đầu sau khi nhận phản hồi kiểm chứng (không sửa đầu ra trên host)
+& .\.venv\Scripts\python.exe research.py "survey about world model" --review-notes validation/world-model-review.md
+
+# Rà và sửa báo cáo đã sinh: agent đọc bản cũ, nghiên cứu và sửa trong sandbox mới
+& .\.venv\Scripts\python.exe research.py "survey about world model" --revise --review-notes validation/world-model-review.md
+
+# Sửa lỗi cụ thể trên bản đã hợp lệ, giữ lịch sử nghiên cứu và kiểm chứng lại 5 khẳng định
+& .\.venv\Scripts\python.exe research.py "survey about world model" --focused-revision --review-notes validation/world-model-review.md
+
+# Chạy đủ 5 chủ đề; bỏ qua các kết quả đã qua kiểm tra khi tiếp tục
+& .\.venv\Scripts\python.exe run_all.py --resume
+
+# Kiểm tra trước khi nộp
+& .\.venv\Scripts\python.exe self_check.py
+```
+
+### Đọc kết quả và kiểm tra
+
+Mỗi chủ đề có ba file cùng basename trong `reports/`:
+
+- `.md`: báo cáo tiếng Anh, tổng hợp theo chủ đề và References.
+- `.sources.json`: nguồn được trích dẫn, gồm `n`, `id`, `url`, `title`, `date`, `source`.
+- `.meta.json`: topic/model, thời gian, số lần giao việc, tool calls, token của lead, số nguồn và họ nguồn.
+
+Tên file được làm sạch, tối đa 60 ký tự; tên của chủ đề dài có thể bị cắt.
+Token trong metadata **không gồm subagent**, nên không phải tổng chi phí của lần chạy.
+Với `--revise`, metadata chỉ đo lượt sửa hiện tại; `revision_of_sha256` nhận diện báo cáo cũ.
+Lượt sửa vẫn có ít nhất ba researcher, audit nguồn và validator; không sửa file báo cáo trên host.
+Với `--focused-revision`, giữ thống kê thật của lần sinh gốc và cộng thống kê lượt sửa;
+`runs` ghi riêng model, thời gian, lượt giao việc và token của từng lượt. Agent chỉ sửa lỗi cụ thể,
+dùng citation-checker kiểm chứng năm khẳng định và chạy lại hai script trong sandbox.
+Metadata chỉ ghi các lượt thành công tạo nên bản nộp; không cộng các lượt thất bại hoặc bị ngắt.
+Chế độ này yêu cầu bản gốc có ít nhất ba lượt giao việc, trích dẫn hợp lệ và ba họ nguồn.
+Mỗi báo cáo phải có ít nhất ba họ nguồn trong `arxiv`, `hf-daily`, `hf-search`, `web`.
+Họ nguồn là công cụ phát hiện nguồn; `web_fetch` không đổi nhãn nguồn đã tìm được.
+Các mẫu đối chiếu nguồn nằm trong [validation/citation-spot-checks.md](validation/citation-spot-checks.md).
+[validation/artifact-sha256.json](validation/artifact-sha256.json) ghi hash của 15 file nộp.
+
+Lead chạy finalizer và validator trong sandbox, sau đó citation-checker kiểm tra năm khẳng định.
+Middleware chặn ghi file ngoài ba vị trí đầu ra/ghi chú và chỉ cho `execute` chạy hai script được cung cấp.
+Trước khi chấp nhận kết quả, host đối chiếu nguyên bytes hai script để phát hiện mọi thay đổi trong sandbox.
+Sau mọi sửa đổi, lead phải chạy lại finalizer và validator. Host chỉ kiểm tra lại và lưu nguyên bytes
+tải về; không sửa báo cáo. Kết quả thiếu/rỗng, citation sai, thiếu họ nguồn hoặc thiếu delegation
+bị từ chối. File được ghi qua staging và khôi phục kết quả cũ nếu gặp lỗi ghi.
+
+Giới hạn: lead 150 model calls/300 tool calls; mỗi subagent 40/60; graph recursion 1000.
+Postflight kiểm tra cả họ nguồn/URL, cấu trúc báo cáo và các tool bắt buộc; nếu chưa đạt,
+cho lead tối đa hai lượt sửa trong cùng sandbox. Các lượt sửa giữ lịch sử thật và được tính vào metadata;
+giới hạn agent áp dụng cho mỗi invocation, và tổng số invocation của lead tối đa ba.
+`LAB_MODEL_RPM` mặc định 10, dùng chung model rate limiter để giảm burst từ các researcher.
+Free tier vẫn có hạn mức token và ngày riêng; HTTP 429 từ model có thể khiến lần chạy thất bại.
+Lỗi model tạm thời được thử tối đa ba lần cho mỗi bước, tôn trọng thời gian chờ trong thông báo Gemini.
+Lỗi xác thực hoặc hết hạn mức ngày dừng ngay. Với khóa có giới hạn 5 RPM, đặt `LAB_MODEL_RPM=4`.
+`run_all.py` dừng ở chủ đề lỗi; sửa nguyên nhân rồi chạy tiếp bằng `--resume`.
+
+Validator kiểm tra cấu trúc citation, không chứng minh mọi khẳng định đúng.
+Mở và đối chiếu ít nhất năm citation mỗi báo cáo trước khi nộp. Chỉ sửa mã/prompt và sinh lại nếu sai.
+Không commit `.env`, không đưa khóa vào sandbox. Không sửa các file được cung cấp sẵn.
+
+---
+
 Lab dựng một **hệ thống deep research đa tác tử**: người dùng chỉ cần nhập một chủ đề (ví dụ `survey about world model`), hệ thống tự lập kế hoạch, giao việc cho nhiều subagent, tìm tài liệu trên arXiv, Hugging Face và web, rồi viết một **báo cáo có trích dẫn**.
 
 Hình thức: **bài thực hành cá nhân**. Ngôn ngữ lập trình: Python 3.11 trở lên.
@@ -59,7 +152,8 @@ Lab/
 └── reports/                  báo cáo sinh ra (bạn commit vào repo nộp)
 ```
 
-Mỗi tệp "SINH VIÊN CÀI ĐẶT" là **pseudo-code chạy được** (import được): các hàm có docstring mô tả việc cần làm, các `TODO n` đánh số theo `GUIDE.md`, thân hàm đang `raise NotImplementedError`.
+Trong bộ khung gốc, các tệp "SINH VIÊN CÀI ĐẶT" là pseudo-code với `NotImplementedError`.
+Bản triển khai này đã hoàn thiện các hàm và prompt; `GUIDE.md` và `RUBRIC.md` giữ nguyên yêu cầu lab.
 
 ## 4. Cài đặt
 

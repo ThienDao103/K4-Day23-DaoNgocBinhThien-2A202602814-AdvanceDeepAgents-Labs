@@ -1,0 +1,64 @@
+{
+  "topic": "survey about reinforcement learning for LLM reasoning",
+  "model": "google_genai:gemini-3.1-flash-lite",
+  "elapsed_s": 1204.9,
+  "subagent_calls": 5,
+  "tool_calls": {
+    "write_todos": 9,
+    "task": 5,
+    "glob": 1,
+    "read_file": 10,
+    "write_file": 4,
+    "execute": 10,
+    "web_fetch": 2,
+    "edit_file": 2
+  },
+  "tokens": {
+    "input": 603922,
+    "output": 12037
+  },
+  "n_sources": 13,
+  "source_families": [
+    "arxiv",
+    "hf-search",
+    "web"
+  ],
+  "run_kind": "focused_revision",
+  "revision_of_sha256": "7d1058fe735e0a1790d129970224fe2ab421e9a39ba4a8be44b627fa1e49e92b",
+  "runs": [
+    {
+      "model": "google_genai:gemini-3.5-flash-lite",
+      "elapsed_s": 901.6,
+      "subagent_calls": 4,
+      "tool_calls": {
+        "write_todos": 6,
+        "task": 4,
+        "glob": 1,
+        "read_file": 7,
+        "write_file": 4,
+        "execute": 7
+      },
+      "tokens": {
+        "input": 470692,
+        "output": 10540
+      }
+    },
+    {
+      "model": "google_genai:gemini-3.1-flash-lite",
+      "elapsed_s": 303.3,
+      "subagent_calls": 1,
+      "tool_calls": {
+        "write_todos": 3,
+        "read_file": 3,
+        "web_fetch": 2,
+        "edit_file": 2,
+        "task": 1,
+        "execute": 3
+      },
+      "tokens": {
+        "input": 133230,
+        "output": 1497
+      }
+    }
+  ]
+}
